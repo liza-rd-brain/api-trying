@@ -2,16 +2,18 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { MyCustomViewProvider } from './viewProvider';
+import { MyCustomTabProvider } from './sidebarViewProvider';
 
 
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	const viewProvider = new MyCustomViewProvider();
-	vscode.window.registerTreeDataProvider("myCustomView", viewProvider);
-  
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
+	// const viewProvider = new MyCustomViewProvider();
+	// vscode.window.registerTreeDataProvider("myCustomView", viewProvider);
+	const provider = new MyCustomTabProvider(context.extensionUri);
+
+	// Use tche console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "helloworld" is now active!');
 
@@ -28,7 +30,17 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showWarningMessage(currTime);
 	});
 
-	context.subscriptions.push(disposable,timing,vscode.commands.registerCommand('myCustomView.refresh', () => viewProvider.refresh()));
+	context.subscriptions.push(
+		disposable,
+		timing,
+		// vscode.commands.registerCommand('myCustomView.refresh', () => viewProvider.refresh()),
+		vscode.window.registerWebviewViewProvider(MyCustomTabProvider.viewType, provider));
+
+context.subscriptions.push(
+	vscode.commands.registerCommand('myCustomView.clicked', () => {
+		vscode.window.showInformationMessage('Button Clicked!');
+	})
+);
 }
 
 // This method is called when your extension is deactivated

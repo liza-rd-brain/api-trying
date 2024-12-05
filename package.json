@@ -16,7 +16,7 @@
       "activitybar": [
         {
           "id": "myCustomViewContainer",
-          "title": "My Custom View",
+          "title": "My Custom View With Cat",
           "icon": "resources/cat.png"
         }
       ]
@@ -25,7 +25,7 @@
       "myCustomViewContainer": [
           {
               "id": "myCustomView",
-              "name": "My Custom View"
+              "name": "My Custom View With Cat"
           }
       ]
   },
