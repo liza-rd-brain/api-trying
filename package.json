@@ -4,32 +4,42 @@
   "description": "",
   "version": "0.0.1",
   "engines": {
-    "vscode": "1.95.3"
+    "vscode": "1.96.2"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": ["onView:myCustomView"],
+  "activationEvents": [
+    "onView:myCustomView"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "myCustomViewContainer",
-          "title": "My Custom View",
+          "id": "myextension-sidebar-view",
+          "title": "My Extension",
           "icon": "resources/cat.png"
         }
       ]
     },
     "views": {
-      "myCustomViewContainer": [
-          {
-              "id": "myCustomView",
-              "name": "My Custom View"
-          }
+      "myextension-sidebar-view": [
+        {
+          "type": "webview",
+          "id": "myextension-sidebar",
+          "name": "MyExtension",
+          "icon": "resources/cat.png",
+          "contextualTitle": "MyExtension"
+        }
       ]
-  },
+    },
     "commands": [
+      {
+        "command": "myextension.sayhello",
+        "category": "MyExtension",
+        "title": "Say hello"
+      },
       {
         "command": "helloworld.whatTime",
         "title": "What time is it"
